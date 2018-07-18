@@ -1,0 +1,340 @@
+@import './variable.scss';
+
+/*
+ * description： 项目公用样式， 指定人维护 -- liudehua
+ * author： liudehua
+*/
+
+html,
+body,
+button,
+p,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+i{
+    font-style: normal;
+}
+
+ul,
+ol, 
+li {
+    list-style: none;
+}
+
+* {
+    outline: none;
+}
+
+div {
+    border: none
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+    text-decoration: none;
+    color: $primaryColor
+}
+
+html,
+body,
+.appArea {
+    height: 100%;
+    width: 100%;
+}
+
+
+/* 注意其中的fontsize大小, 是为了采用rem为单位的比例换算, 相当于1rem=16px,
+* 为了兼容pad等移动大屏设备,
+* @media screen and (min-width:769px){
+*   html{font-size: 200%}
+* }
+*/
+
+html,
+body {
+    font-size: 16px;
+    color: $mainColor;
+}
+h4{
+    font-size: 18px;
+}
+
+.font_size{
+    font-size: 14px;
+}
+.font_size_sm{
+    font-size: 12px;
+}
+
+img {
+    width: 100%;
+}
+
+/*滚动条*/
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
+}
+::-webkit-scrollbar-track {
+    opacity: 0;
+}
+
+/* 一个系统字体很重要, 这里设置的是苹果系统下用平方字体, pc下用微软雅黑, 其他为后补字体  */
+body,
+input,
+select,
+checkbox,
+radio, textarea, keygen, button {
+    -webkit-overflow-scrolling: touch;
+    font-family: "PingHei","Helvetica Neue","Helvetica","STHeitiSC-Light","Arial","Microsoft YaHei",'WenQuanYi Micro Hei',sans-serif;
+}
+
+.t_r{
+    text-align: right
+}
+
+.clearfix:after {
+    content: "";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both
+}
+.clearfix{
+    zoom: 1;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+/* 颜色 */
+.primary_color {
+    color: $primaryColor !important;
+}
+.info_color {
+    color: $infoColor !important;
+}
+.warning_color {
+    color: $warningColor !important;
+}
+.danger_color {
+    color: $dangerColor !important;
+}
+.success_color {
+    color: $successColor !important;
+}
+.color9 {
+    color: #928282;
+}
+
+.bg_danger {
+    background-color: $dangerColor/* 红 */
+}
+
+.bg_warning {
+    background-color: $warningColor/* 黄 */
+}
+
+.bg_info {
+    background-color: $infoColor/* 紫色 */
+}
+
+.bg_success {
+    background-color: $successColor/* 绿 */
+}
+
+.bg_fff {
+    background-color: $bgFColor;
+}
+
+// 状态标签 
+.status_btn {
+    display: inline-block;
+    color: #fff;
+    padding: 0 .4rem;
+    border-radius: .2rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
+}
+
+// 公用内容区
+.un_content {
+
+}
+.inline_block{
+    display: inline-block;
+}
+.m_tb_mi{
+    margin-top: .3125rem;
+    margin-bottom: .3125rem;
+}
+.m_r_mi{
+    margin-right: .3125rem
+}
+
+.m_t {
+    margin-top: .9375rem;
+}
+.m_b {
+    margin-bottom: .9375rem;
+}
+.m_l {
+    margin-left: .9375rem;
+}
+.m_r {
+    margin-right: .9375rem;
+}
+.m_b_sm {
+    margin-bottom: .75rem;
+}
+.m_t_sm {
+    margin-top: .75rem;
+}
+
+.m_l_sm {
+    margin-left: .75rem;
+}
+.m_r_sm {
+    margin-right: .75rem;
+}
+
+
+.p_lr {
+    padding-right: .9375rem;
+    padding-left: .9375rem;
+}
+.p_bg{
+    padding: 1.25rem;
+}
+.p_sm{
+    padding: .75rem;
+}
+.p_lrbg{
+    padding: 0 1.25rem 1.25rem;
+}
+
+.bg_light {
+    color: #58666e;
+    background-color: $bgGrayColor_light_1;
+}
+
+.b_b {
+    border-bottom: 1px solid $bdDefaultColor;
+}
+.b_t{
+    border-top: 1px solid $bdDefaultColor;
+}
+
+.font_bold {
+    font-weight: bold;
+}
+// 阴影
+.pd_shadow{
+    box-shadow: .0625rem .0625rem .0625rem #ddd;
+}
+
+// 超出显示省略号
+.over{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 1.2rem;
+    word-wrap:break-word;
+}
+.over_num3{
+    -webkit-line-clamp: 3;
+    
+}
+
+// 定位
+.rel{
+    position: relative;
+}
+
+.abs{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.hint {
+    line-height: 1.5rem;
+}
+

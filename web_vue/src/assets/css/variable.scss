@@ -1,0 +1,43 @@
+/*
+ * description： 项目公用样式变量， 指定人维护 -- liudehua
+ * author： liudehua
+*/
+
+// 颜色变量
+$primaryColor: #23b7e5;
+$infoColor: #7266ba;
+$successColor: #61c64c;
+$warningColor: #e6a23c;
+$dangerColor: #f05050;
+$mainColor: #58666e;
+$minorColor: #98a6a9;
+$conventionColor: #363f44;
+$bgFColor: #fff;
+$bgGrayColor: #edf1f2;
+$bgGrayColor_light_1: #f6f8f8;
+
+$bdDefaultColor: #dee5e7;
+$bdGrayColor: #edf1f2;
+
+$fColor: #fff;
+// 字体变量
+$fontSize: 12px;
+$midFontSize: 14px;
+$bigFontSize: 16px;
+
+// border 变量
+
+
+/* element-ui 公用颜色变量 */
+/* 改变主题色变量 */
+// $--color-primary: $primaryColor;
+
+// $--color-success: $successColor !default;
+// $--color-warning: $warningColor !default;
+// $--color-danger: $dangerColor !default;
+// $--color-info: $infoColor !default;
+ 
+/* 改变 icon 字体路径变量，必需 */
+// $--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+// @import "~element-ui/packages/theme-chalk/src/index";
