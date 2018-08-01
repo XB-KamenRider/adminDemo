@@ -135,10 +135,6 @@ h4{
     font-size: 12px;
 }
 
-img {
-    width: 100%;
-}
-
 /*滚动条*/
 ::-webkit-scrollbar {
     width: 0.5rem;
@@ -201,6 +197,11 @@ radio, textarea, keygen, button {
 }
 .color9 {
     color: #928282;
+}
+
+/* 颜色 */
+.bg_primary {
+    background-color: $primaryColor;
 }
 
 .bg_danger {

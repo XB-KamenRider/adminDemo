@@ -4,7 +4,7 @@
 */
 
 // 颜色变量
-$primaryColor: #23b7e5;
+$primaryColor: #409eff;
 $infoColor: #7266ba;
 $successColor: #61c64c;
 $warningColor: #e6a23c;
@@ -32,12 +32,13 @@ $bigFontSize: 16px;
 /* 改变主题色变量 */
 // $--color-primary: $primaryColor;
 
-// $--color-success: $successColor !default;
-// $--color-warning: $warningColor !default;
-// $--color-danger: $dangerColor !default;
-// $--color-info: $infoColor !default;
+$--color-success: $successColor !default;
+$--color-warning: $warningColor !default;
+$--color-danger: $dangerColor !default;
+$--color-info: $infoColor !default;
+$--color-primary: $primaryColor !default;
  
 /* 改变 icon 字体路径变量，必需 */
-// $--font-path: '~element-ui/lib/theme-chalk/fonts';
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
 
-// @import "~element-ui/packages/theme-chalk/src/index";
+@import "~element-ui/packages/theme-chalk/src/index";

@@ -1,6 +1,8 @@
 // 引入编写好的api
 const login = require('./api/login'); 
+// const redis = require('./redis/redis'); 
 const db = require('./db'); 
+const ws = require('./ws')
 // 引入文件模块
 const fs = require('fs');
 // 引入处理路径的模块
@@ -21,6 +23,7 @@ app.get('*', function(req, res) {
     const html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8')
     res.send(html)
 })
+
 // 监听8088端口
 app.listen(8088);
 console.log('success listen…………');

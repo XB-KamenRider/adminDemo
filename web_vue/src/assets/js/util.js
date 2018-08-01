@@ -68,14 +68,14 @@
     // 数据通道
     if (response.data && response.data.code == 200) {
       if (sucessCallback)
-        sucessCallback.call(response, response.data.bizData)
+        sucessCallback.call(response, response.data)
       return
     } else {
       // 登录验证
-      if (response.data.rtnCode == '80000009') {
-        Util.message(vm, '警告', '您的登录状态已失效,请重新登录', 'warning');
+      if (response.data.code == '201') {
+        Util.message(vm, '您的登录状态已失效,请重新登录', 'warning');
       } else {
-        Util.message(vm, '错误', response.data.msg, 'error');
+        Util.message(vm, response.data.msg, 'error');
         if (failCallback)
           failCallback.call(response, response.data)
       }
@@ -91,7 +91,7 @@
     if (data[key] && data[key].length > 0) {
       window.location.href = vm.common.setURLAction('/teacher/file/file/mutiDownFile') + `&courseId=${data.id}`
     } else {
-      Util.message(vm, '', '没有可下载的资料');
+      Util.message(vm, '没有可下载的资料');
     }
   };
   /**
@@ -100,9 +100,9 @@
    * description 提示 
    * directions Util.message(vm,title,msg,type);
    */
-  Util.message = (vm, title, msg, type = 'info') => {
-    vm.$notify({
-      title: title || '提示',
+  Util.message = (vm, msg, type = 'info') => {
+    vm.$message({
+      showClose: true,
       message: msg,
       type: type
     });

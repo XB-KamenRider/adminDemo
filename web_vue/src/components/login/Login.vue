@@ -1,30 +1,37 @@
 <template>
-  <div class="login">
+  <div class="login bg_primary">
     <div class="login_box">
-      <div class="title">
+      <div class="title bg_primary">
         登录
       </div>
       <div class="form">
         <form id="formlogin" method="post" onsubmit="return false;">
-            <p class="msgError"> <a v-if="hintMsg"><i class="el-icon-information"></i>&nbsp;&nbsp;{{hintMsg}}</a></p>
-            <div class="item item_fore1">
-                <el-input placeholder="用户名" v-model="loginData.account">
-                  <template slot="prepend">
-                    <i class="iconfont icon-yonghu01"></i>
-                  </template>
-                </el-input>
-            </div>
-            <div class="item item_fore2">
-                <el-input placeholder="密码" type="password" @keydown.13.native="subLoginMsg()" v-model="loginData.password">
-                    <template slot="prepend">
-                      <i class="iconfont icon-mima"></i>
-                    </template>
-                </el-input>
-            </div>
-            <div class="item">
-                <el-button v-if="!loginState" class="login_btn" type="primary"   @click="subLoginMsg">登&nbsp;&nbsp;录</el-button>
-                <el-button v-else class="login_btn" type="primary" :loading="true">登录中</el-button>
-            </div>
+          <p class="msg_error">
+            <a v-if="hintMsg" class="danger_color">
+              <i class="el-icon-information"></i>&nbsp;&nbsp;{{hintMsg}}</a>
+          </p>
+          <div class="item item_fore1">
+            <el-input placeholder="账号 / 手机号" v-model="loginData.account" @keydown.13.native="subLoginMsg()">
+              <template slot="prepend">
+                <i class="iconfont icon-yonghu01"></i>
+              </template>
+            </el-input>
+          </div>
+          <div class="item item_fore2">
+            <el-input placeholder="密码" type="password" @keydown.13.native="subLoginMsg()" v-model="loginData.password">
+              <template slot="prepend">
+                <i class="iconfont icon-mima"></i>
+              </template>
+            </el-input>
+          </div>
+          <div class="item">
+            <el-button v-if="!loginState" class="login_btn" type="primary" @click="subLoginMsg">登&nbsp;&nbsp;录</el-button>
+            <el-button v-else class="login_btn" type="primary" :loading="true">登录中</el-button>
+          </div>
+          <div class="login_links">
+            <router-link to="/forgetpwd">忘记密码</router-link>
+            <router-link to="/register">免费注册</router-link>
+          </div>
         </form>
       </div>
     </div>
@@ -32,16 +39,13 @@
 </template>
 
 <script>
+import md5 from  'js-md5';
 export default {
   name: "login",
   data() {
     return {
       type: 0,
       hintMsg: "", // 错误信息
-      api: {
-        loginApi: "/api/login/loginApi",
-        loginInfoApi: "/ucm/boss/role/queryRoleListByPage"
-      },
       loginState: false,
       loginData: {
         account: "",
@@ -52,59 +56,63 @@ export default {
   mounted() {},
   methods: {
     subLoginMsg() {
-      let vm = this;
       // 接口所需参数准备
-      if (!vm.loginData.account && !vm.loginData.password) {
-        vm.hintMsg = "请输入用户名和密码";
+      if (!this.loginData.account && !this.loginData.password) {
+        this.hintMsg = "请输入账号和密码";
         return;
-      } else if (!vm.loginData.account) {
-        vm.hintMsg = "请输入用户名";
+      } else if (!this.loginData.account) {
+        this.hintMsg = "请输入账号";
         return;
-      } else if (!vm.loginData.password) {
-        vm.hintMsg = "请输入密码";
+      } else if (!this.loginData.password) {
+        this.hintMsg = "请输入密码";
         return;
       } else {
-        vm.hintMsg = "";
-        vm.loginState = true;
+        this.hintMsg = "";
       }
-
-      vm.http
-        .post(this.api.loginApi, this.loginData)
+      this.loginState = true;
+      let obj = Util.deepCopyObj(this.loginData);
+      obj.password = md5(obj.password);
+      this.http
+        .post(Api.Login.login(), obj)
         .then(response => {
           Util.processRes(
-            vm,
+            this,
             response,
             res => {
-              vm.loginState = false;
-              vm.$router.push({ path: "/index" });
+              this.loginState = false;
+              console.log(res);
+              // 设置Token
+              Util.loginState('set', 'token', res.token);
+              // this.$router.push({ path: "/index" });
             },
-            responseData => {
-              vm.loginState = false;
-              vm.hintMsg = responseData.msg;
+            res => {
+              this.loginState = false;
             }
           );
         })
-        .catch(res => {});
+        .catch(res => {
+          this.loginState = false;
+        });
     }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped="" type="text/css">
+<style lang="scss" scoped type="text/css">
+@import "~@/assets/css/variable.scss";
 .login {
   height: 100%;
   width: 100%;
   background-size: 100% 100%;
-  background: #23b7e5
 }
 .login_box {
   width: 21.875rem;
-  height: 18.75rem;
+  height: 20rem;
   left: 50%;
   top: 50%;
   margin-left: -10.9375rem;
-  margin-top: -9.375rem; 
+  margin-top: -10rem;
   position: fixed;
   z-index: 4;
   background: #fff;
@@ -117,7 +125,6 @@ export default {
     height: 3.375rem;
     line-height: 3.375rem;
     font-weight: 600;
-    background-color: #000;
     color: #fff;
     border-radius: 4px 4px 0 0;
     text-indent: 1.25rem;
@@ -125,18 +132,17 @@ export default {
   #formlogin {
     width: 17.5rem;
     margin: 1.25rem auto;
-    .msgError {
+    .msg_error {
       min-height: 1.4375rem;
-      margin-top: .3125rem;
-      margin-bottom: .3125rem;
+      margin-top: 0.3125rem;
+      margin-bottom: 0.3125rem;
       height: auto !important;
       a {
         width: 100%;
         display: inline-block;
-        color: #e4393c;
-        line-height: .9375rem;
-        text-indent: .125rem;
-        font-size: .875rem;
+        line-height: 0.9375rem;
+        text-indent: 0.125rem;
+        font-size: 0.875rem;
       }
     }
     .item {
@@ -162,7 +168,12 @@ export default {
       height: 2.5rem;
       border-radius: 0.25rem;
     }
+    .login_links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+    }
   }
 }
 </style>
-

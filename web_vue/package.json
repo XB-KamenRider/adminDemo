@@ -14,11 +14,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "area-data": "^5.0.6",
     "cors": "^2.8.4",
     "element-ui": "^2.4.4",
+    "js-md5": "^0.7.3",
     "mongoose": "^5.2.3",
+    "nodejs-websocket": "^1.7.1",
+    "util": "^0.11.0",
     "vue": "^2.5.2",
+    "vue-area-linkage": "^5.0.0",
     "vue-router": "^3.0.1",
+    "vue-websocket": "^0.2.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
