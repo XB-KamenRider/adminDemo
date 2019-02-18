@@ -4,10 +4,10 @@
 
 const Login = {
   login:(data)=> {
-    return window.server_path.login+"/loginApi";
+    return "/login/loginApi";
   },
   register:()=> {
-    return window.server_path.login+"/registerApi";
+    return "/login/registerApi";
   }
 }
 

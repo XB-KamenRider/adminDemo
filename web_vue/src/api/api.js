@@ -1,13 +1,16 @@
-// 定义url
-window.server_path = {
-  login: '/api/login'
-};
+/**
+ * Created by liudehua on 18/7/30.
+ */
 
 import Login from './login';
+import User from './user';
+import Goods from './goods';
 
 (function (window) {
   const Api = {
-    Login: Login
+    Login: Login,
+    User: User,
+    Goods: Goods
   };
 
   window.Api = Api;

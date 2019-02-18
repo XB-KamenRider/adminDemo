@@ -11,27 +11,21 @@ const token = {
   setToken: function(UserId, key) {
     client.select('0', (error) => {
       // set 
-      client.set(key, UserId, (error, res) => {
+      client.set(key, UserId.toString(), (error, res) => {
         //设置过期
-        client.expire(key, 3600, (err, success) => {
-          console.log(err);
-        });
-        // this.getToken(key);
+        client.expire(key, 3600);
       });
     });
   },
   getToken: (key, callback) => {
-    client.select('0', function (error) {
+    client.select('0', function (error, success) {
       // get
       client.get(key, function (error, res) {
-        console.log(res);
         if(error) {
           callback(error)
         }else {
-          callback(res[0])
+          callback(res)
         }
-        // 关闭链接
-        // client.end();
       });
     });
   }

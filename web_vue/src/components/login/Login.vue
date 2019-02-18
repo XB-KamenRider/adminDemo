@@ -79,11 +79,10 @@ export default {
             this,
             response,
             res => {
-              this.loginState = false;
-              console.log(res);
               // 设置Token
-              Util.loginState('set', 'token', res.token);
-              // this.$router.push({ path: "/index" });
+              Util.localStorage('set', 'token', res.data.token);
+              this.$router.push({ path: "/main" });
+              this.loginState = false;
             },
             res => {
               this.loginState = false;

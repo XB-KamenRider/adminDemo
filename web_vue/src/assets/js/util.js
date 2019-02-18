@@ -66,7 +66,7 @@
    */
   Util.processRes = function (vm, response, sucessCallback, failCallback) {
     // 数据通道
-    if (response.data && response.data.code == 200) {
+    if (response.data.data && response.data.code == 200) {
       if (sucessCallback)
         sucessCallback.call(response, response.data)
       return
@@ -77,21 +77,8 @@
       } else {
         Util.message(vm, response.data.msg, 'error');
         if (failCallback)
-          failCallback.call(response, response.data)
+          failCallback.call(response, response.data.data)
       }
-    }
-  };
-  /**
-   * 作者 刘德华
-   * 日期 2018061
-   * 下载文件
-   * 用法 Util.batchDownLoad(vm,data,key);
-   */
-  Util.batchDownLoad = function (vm, data, key) {
-    if (data[key] && data[key].length > 0) {
-      window.location.href = vm.common.setURLAction('/teacher/file/file/mutiDownFile') + `&courseId=${data.id}`
-    } else {
-      Util.message(vm, '没有可下载的资料');
     }
   };
   /**
@@ -120,26 +107,6 @@
     list.splice(list.length - 1, 1);
     return list;
   }
-  /**
-   * 作者 刘德华
-   * 日期 20170310
-   * 取出url需要的字段名 = 后面的属性
-   * 用法 Util.getUrlParam(id);
-   */
-  Util.getUrlParam = function (key) {
-    // 获取URL中?之后的字符
-    var str = location.search;
-    str = str.substring(1, str.length);
-    // 以&分隔字符串，获得类似name=xiaoli这样的元素数组
-    var arr = str.split('&');
-    var obj = new Object();
-    // 将每一个数组元素以=分隔并赋给obj对象
-    for (var i = 0; i < arr.length; i++) {
-      var tmp_arr = arr[i].split('=');
-      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
-    }
-    return obj[key];
-  };
   // 数组转字符串
   Util.propsArrayToString = function (array, type = 'checked', id = "id") {
     var resultArray = []

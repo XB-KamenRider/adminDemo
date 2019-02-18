@@ -1,9 +1,5 @@
 <template>
   <div class="wsDemo">
-    <el-select v-model="userData" value-key="value" placeholder="请选择" @change="changSelectAction">
-      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item">
-      </el-option>
-    </el-select>
     <ul>
       <li v-for="item in list" :key="item.id" :class="userData.value == item.id ? 'active' : ''">
         <div class="">
@@ -25,28 +21,24 @@ export default {
   name: "WsDemo",
   data() {
     return {
-      options: [
-        {
-          value: 1,
-          label: "老刘"
-        },
-        {
-          value: 2,
-          label: "老王"
-        }
-      ],
-      userData: {
-        value: 1,
-        label: "老刘"
-      },
+      userData: {},
       list: [],
       userList: [],
       websock: "",
       content: ""
     };
   },
-  mounted() {},
+  created() {
+    // this.getUserInfoAction();
+  },
   methods: {
+    getUserInfoAction() {
+      this.http.get(Api.User.userInfo()).then(response => {
+        Util.processRes(this, response, res => {
+          console.log(res);
+        })
+      })
+    },
     changSelectAction(item) {
       console.log(item);
     },
@@ -82,7 +74,7 @@ export default {
     /* 初始化websochet */
     websochetInit() {
       if ("WebSocket" in window) {
-        this.websock = new WebSocket("ws://localhost:8081/");
+        this.websock = new WebSocket("ws://localhost:8085/");
       } else {
         return;
       }

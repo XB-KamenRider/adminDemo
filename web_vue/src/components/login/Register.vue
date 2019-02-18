@@ -79,9 +79,6 @@ export default {
     return {
       msg: "注册",
       loginState: false,
-      api: {
-        registerApi: "/api/login/registerApi"
-      },
       ruleForm: {
         account: "",
         password: "",
@@ -110,7 +107,7 @@ export default {
           let obj = Util.deepCopyObj(this.ruleForm);
           obj.password = md5(obj.password);
           this.http
-            .post(this.api.registerApi, obj)
+            .post(Api.Login.register(), obj)
             .then(response => {
               Util.processRes(
                 this,
@@ -132,7 +129,7 @@ export default {
     },
     // 跳转操作
     goToLogin() {
-      this.$confirm("是否立即登录?", "提示", {
+      this.$confirm("注册成功,是否立即登录?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"

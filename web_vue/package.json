@@ -20,6 +20,7 @@
     "js-md5": "^0.7.3",
     "mongoose": "^5.2.3",
     "nodejs-websocket": "^1.7.1",
+    "qs": "^6.5.2",
     "util": "^0.11.0",
     "vue": "^2.5.2",
     "vue-area-linkage": "^5.0.0",

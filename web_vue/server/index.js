@@ -1,5 +1,5 @@
 // 引入编写好的api
-const login = require('./api/login'); 
+const api = require('./api/api'); 
 // const redis = require('./redis/redis'); 
 const db = require('./db'); 
 const ws = require('./ws')
@@ -15,7 +15,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(login);
+
+app.use(api.login, api.user, api.goods);
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
 app.use(express.static(path.resolve(__dirname, '../dist')))
 // 因为是单页应用 所有请求都走/dist/index.html
